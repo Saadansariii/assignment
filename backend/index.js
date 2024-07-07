@@ -1,6 +1,8 @@
 import express, { json } from "express";
 import cors from "cors";
 import { connectDB } from "./db.js";
+
+// Database Schema
 import User from "./schema/user.schema.js";
 import Attendance from "./schema/attendance.schema.js";
 import Admin from "./schema/admin.schema.js";
@@ -14,11 +16,6 @@ app.listen(PORT, () => {
   console.log(`APP IS RUNNNING ON ${PORT}`);
 });
 
-app.get("/", (req, res) => {
-  console.log("i got called");
-  res.status(200).json("Hello world");
-});
-
 connectDB(process.env.MONGO_URL)
   .then(() => {
     console.log("db connected");
@@ -27,11 +24,15 @@ connectDB(process.env.MONGO_URL)
     console.log(err);
   });
 
+app.get("/", (req, res) => {
+  res.status(200).json("Health check");
+});
+
 app.post("/register", async (req, res) => {
   const { username, password, email, phoneNo } = req.body;
   console.log(req.body);
   if (!username || !password || !email || !phoneNo) {
-    return res.status(403).json();
+    return res.status(403).json({ message: "Invalid input" });
   }
   const response = await User.create({ username, password, email, phoneNo });
   if (!response) {
@@ -42,7 +43,6 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body);
   if (!username || !password) {
     return res.status(403).json({ message: "Please add value" });
   }
@@ -63,6 +63,7 @@ app.post("/in", async (req, res) => {
     return res.status(403).json({ message: "Please add data" });
   }
 
+  // if server fails then catch will run
   try {
     const response = await Attendance.create({
       inTime,
@@ -104,7 +105,7 @@ app.post("/out", async (req, res) => {
 });
 
 app.post("/report", async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.body; // Getting ID from user
   console.log(id);
 
   const response = await Attendance.find({ user: id });
@@ -117,6 +118,8 @@ app.post("/report", async (req, res) => {
 });
 
 app.post("/admin-login", async (req, res) => {
+  // only USERNAME: admin
+  // PASSWORD: admin can login
   const { username, password } = req.body;
   console.log(req.body);
   if (!username || !password) {

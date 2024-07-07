@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const attendanceSchema = new mongoose.Schema({
+  // Pointing to the user for reference ID
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -11,7 +12,7 @@ const attendanceSchema = new mongoose.Schema({
   },
   outTime: {
     type: String,
-    default: "Absent",
+    default: "",
   },
   date: {
     type: String,
