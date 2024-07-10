@@ -57,9 +57,9 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/in", async (req, res) => {
-  const { inTime, date, id } = req.body;
+  const { inTime, date, username } = req.body;
 
-  if (!inTime || !date || !id) {
+  if (!inTime || !date || !username) {
     return res.status(403).json({ message: "Please add data" });
   }
 
@@ -68,7 +68,7 @@ app.post("/in", async (req, res) => {
     const response = await Attendance.create({
       inTime,
       date,
-      user: id,
+      username,
     });
 
     return res.status(200).json({ response });
@@ -81,15 +81,15 @@ app.post("/in", async (req, res) => {
 });
 
 app.post("/out", async (req, res) => {
-  const { outTime, date, id } = req.body;
+  const { outTime, date, username } = req.body;
   console.log(req.body);
 
-  if (!outTime || !date || !id) {
+  if (!outTime || !date || !username) {
     return res.status(403).json({ message: "Please add data" });
   }
   try {
     const response = await Attendance.findOneAndUpdate(
-      { _id: id, date },
+      { username, date },
       {
         outTime,
       },
@@ -105,10 +105,10 @@ app.post("/out", async (req, res) => {
 });
 
 app.post("/report", async (req, res) => {
-  const { id } = req.body; // Getting ID from user
-  console.log(id);
+  const { username } = req.body; // Getting ID from user
+  console.log(username);
 
-  const response = await Attendance.find({ user: id });
+  const response = await Attendance.find({ username });
   console.log(response);
   if (!response) {
     return res.status(200).json({ message: "error" });

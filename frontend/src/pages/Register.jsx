@@ -22,7 +22,7 @@ const Register = () => {
       })
       .then((response) => {
         const data = response.data;
-        localStorage.setItem("id", data._id);
+        localStorage.setItem("username", data.username);
         console.log(response);
         toast.success("Register successs");
         navigate("/");
@@ -36,35 +36,35 @@ const Register = () => {
     <>
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 justify-center h-screen">
         <Input
-          value={username}
-          type={"text"}
-          placeholder={"Username"}
-          name={"username"}
-          onChange={(e) => setUsername(e.target.value)}
+          value={ username }
+          type={ "text" }
+          placeholder={ "Username" }
+          name={ "username" }
+          onChange={ (e) => setUsername(e.target.value) }
         />
         <Input
-          value={password}
-          type={"password"}
-          placeholder={"Password"}
-          name={"password"}
-          onChange={(e) => setPassword(e.target.value)}
+          value={ password }
+          type={ "password" }
+          placeholder={ "Password" }
+          name={ "password" }
+          onChange={ (e) => setPassword(e.target.value) }
         />
         <Input
-          value={phone}
-          type={"text"}
-          placeholder={"Phone No"}
-          name={"phoneno"}
-          onChange={(e) => setPhone(e.target.value)}
+          value={ phone }
+          type={ "text" }
+          placeholder={ "Phone No" }
+          name={ "phoneno" }
+          onChange={ (e) => setPhone(e.target.value) }
         />
         <Input
-          value={email}
-          type={"email"}
-          placeholder={"Email"}
-          name={"email"}
-          onChange={(e) => setEmail(e.target.value)}
+          value={ email }
+          type={ "email" }
+          placeholder={ "Email" }
+          name={ "email" }
+          onChange={ (e) => setEmail(e.target.value) }
         />
         <button
-          onClick={handleSubmit}
+          onClick={ handleSubmit }
           className="bg-blue-400 text-white px-4 rounded-md py-1"
         >
           Signin

@@ -20,13 +20,13 @@ const Home = () => {
   const handleSignIN = () => {
     const { formatedDate, formatedTime } = getTime();
     console.log("In time", formatedTime, formatedDate);
-    const id = localStorage.getItem("id");
-    console.log(id);
+    const username = localStorage.getItem("username");
+    console.log(username);
     axios
       .post("http://localhost:8000/in", {
         inTime: formatedTime,
         date: formatedDate,
-        id,
+        username,
       })
       .then((response) => {
         console.log(response.data);
@@ -40,12 +40,12 @@ const Home = () => {
   const handleSignOUT = () => {
     const { formatedDate, formatedTime } = getTime();
     console.log("OUT time", formatedTime, formatedDate);
-    const id = localStorage.getItem("id");
+    const username = localStorage.getItem("username");
     axios
       .post("http://localhost:8000/out", {
         outTime: formatedTime,
         date: formatedDate,
-        id,
+        username,
       })
       .then((response) => {
         console.log(response.data);
@@ -59,18 +59,18 @@ const Home = () => {
   return (
     <>
       <div className="max-w-xs mx-auto flex flex-col h-screen py-28 gap-1 text-center">
-        <div>{date}</div>
-        <div>{time}</div>
+        <div>{ date }</div>
+        <div>{ time }</div>
         <div className="h-full flex flex-col justify-between my-4">
           <button
             className="border px-4 py-1 border-black bg-gray-100"
-            onClick={signin ? handleSignOUT : handleSignIN}
+            onClick={ signin ? handleSignOUT : handleSignIN }
           >
-            {signin ? "Sign Out" : "Sign in"}
+            { signin ? "Sign Out" : "Sign in" }
           </button>
           <button
             className="border px-4 py-1 border-black bg-gray-100"
-            onClick={() => navigate("/view-report")}
+            onClick={ () => navigate("/view-report") }
           >
             View Report
           </button>
