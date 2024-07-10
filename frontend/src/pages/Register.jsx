@@ -33,9 +33,9 @@ const Register = () => {
   };
 
   return (
-    <>
-      <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 justify-center h-screen">
-        <Input
+ <div className="flex items-center justify-center h-screen">
+ <div className=" w-80 border-black border-2 h-auto space-y-4 p-3 rounded-lg ">   
+       <Input
           value={ username }
           type={ "text" }
           placeholder={ "Username" }
@@ -63,6 +63,7 @@ const Register = () => {
           name={ "email" }
           onChange={ (e) => setEmail(e.target.value) }
         />
+        <div className="flex justify-center">
         <button
           onClick={ handleSubmit }
           className="bg-blue-400 text-white px-4 rounded-md py-1"
@@ -70,7 +71,8 @@ const Register = () => {
           Signin
         </button>
       </div>
-    </>
+      </div>
+</div>
   );
 };
 
