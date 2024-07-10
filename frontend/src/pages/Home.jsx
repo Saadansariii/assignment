@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Footer,RootTopBar } from "../component/Navs";
 const Home = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -57,7 +58,9 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div>
+      <RootTopBar></RootTopBar>
+
       <div className="max-w-xs mx-auto flex flex-col h-screen py-28 gap-1 text-center">
         <div>{ date }</div>
         <div>{ time }</div>
@@ -82,8 +85,9 @@ const Home = () => {
             View Report
           </button>
         </div>
+        <Footer />
       </div>
-    </>
+      </div>
   );
 };
 
