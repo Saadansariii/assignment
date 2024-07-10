@@ -13,34 +13,34 @@ const AdminUsers = () => {
     getUsers();
   }, []);
 
-  const getUserAttendance = async (id) => {
-    const response = await axios.post("http://localhost:8000/report", { id });
+  const getUserAttendance = async (username) => {
+    const response = await axios.post("http://localhost:8000/report", { username });
     setUserDetail(response.data);
   };
   return (
     <>
       <div className="flex justify-center gap-4">
         <div className="flex flex-col h-screen w-full py-28 gap-1 items-center text-center border-black border">
-          {users.map((user) => {
+          { users.map((user) => {
             return (
               <button
                 className="border-b border-black py-4"
-                onClick={() => getUserAttendance(user._id)}
-                key={user._id}
+                onClick={ () => getUserAttendance(user.username) }
+                key={ user._id }
               >
-                {user.username}
+                { user.username }
               </button>
             );
-          })}
+          }) }
         </div>
         <div className="w-full">
-          {userDetail.map((item) => (
-            <div key={item._id} className="border-b border-black py-2">
-              <p>{item.date}</p>
-              <p>Sign in {item.inTime}</p>
-              <p>Sign out {item.outTime}</p>
+          { userDetail.map((item) => (
+            <div key={ item._id } className="border-b border-black py-2">
+              <p>{ item.date }</p>
+              <p>Sign in { item.inTime }</p>
+              <p>Sign out { item.outTime }</p>
             </div>
-          ))}
+          )) }
         </div>
       </div>
     </>
