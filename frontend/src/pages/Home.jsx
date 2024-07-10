@@ -68,6 +68,13 @@ const Home = () => {
           >
             { signin ? "Sign Out" : "Sign in" }
           </button>
+          <button className="border px-4 py-1 border-black bg-gray-100"
+          onClick={()=>{
+            localStorage.removeItem("username")
+            navigate("/login")
+
+          }}
+          >Logout</button>
           <button
             className="border px-4 py-1 border-black bg-gray-100"
             onClick={ () => navigate("/view-report") }
